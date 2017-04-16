@@ -1,0 +1,19 @@
+{
+  "name": "ppwrite",
+  "version": "1.0.0",
+  "description": "A minimalElectron application",
+  "main": "main.js",
+  "scripts": {
+    "test": "start",
+    "start": "electron .",
+    "packager": "electron-packager ./ moduleTest --out ./OutApp --version 1.4.1 --overwrite"
+  },
+  "devDependencies": {
+    "electron-packager": "^8.4.0",
+    "electron-rebuild": "^1.4.0"
+  },
+  "dependencies": {
+    "dragula": "^3.7.2",
+    "electron-tabs": "^0.6.0"
+  }
+}

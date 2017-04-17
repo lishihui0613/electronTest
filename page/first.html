@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+
+
+<!--<div class="etabs-tabgroup">
+    <div class="etabs-tabs"></div>
+    <div class="etabs-buttons"></div>
+</div>
+<div class="etabs-views">-->
+    <div id="one" title="ls2-dev语言服务器" class="http://www.baidu.com">ls2-dev语言服务器</div>
+    <div id="two" title="cats使用" class="http://cats2.51chaoqun.com">cats使用</div>
+    <div id="3" title="关于我们" class="./page/about.html">关于我们</div>
+    <div id="4" title="问题反馈" class="./page/question.html">问题反馈</div>
+<!--</div>
+<script>
+    // You can also require other files to run in this process
+    require('../js/renderer.js')
+</script>-->
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+<script>
+    /*var a= document.getElementById('1');
+    a.onclick=function () {
+        alert(1)
+    }*/
+    /*const TabGroup = require('electron-tabs');
+    const dragula = require("dragula");
+    let tabGroup = new TabGroup({
+        ready: function (tabGroup) {
+            dragula([tabGroup.tabContainer], {
+                direction: "horizontal"
+            });
+        }
+    });
+    const contentView = document.querySelector('.etabs-views');
+
+
+    // 页面初始化
+    let tab = tabGroup.addTab({
+        title:'首页',
+        src:'./page/first.html',
+        visible: true,
+        active:true,
+        closable:false,
+        ready:function () {
+
+        }
+
+    });*/
+    $('div').forEach()
+    var aDiv=document.getElementsByTagName('div');
+    for(var i=0;i<aDiv.length;i++){
+        var cur=aDiv[i];
+        cur.addEventListener('click',function (e) {
+            /*alert(1)
+            var arr=[];
+            var len=document.getElementsByClassName("etabs-tab").length;
+            for(i=0;i<len;i++){
+                (function(i){
+                    var aaa=document.getElementsByClassName("etabs-tab")[i];
+                    // console.log(aaa)
+                    var a=aaa.getElementsByClassName("etabs-tab-title")[0];
+                    var content=a.innerHTML;
+                    arr.push(content);
+                    // console.log(arr)
+                })(i)
+            }
+            for(i=0;i<arr.length;i++){
+                if(arr[i]==this.title){
+                    return;
+                }
+            }*/
+            e && e.stopPropagation();
+            let tab = tabGroup.addTab({
+                title: this.title,
+                src: this.className,
+                visible: true,
+                active: true
+            });
+            alert(1)
+        })
+    }
+</script>
+</body>
+</html>

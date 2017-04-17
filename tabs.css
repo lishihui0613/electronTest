@@ -1,0 +1,8 @@
+/*.etabs-tabgroup{
+    position: fixed;
+    top:0;
+    left:0;
+}*/
+.etabs-tab{
+    border-radius: 3px;
+}

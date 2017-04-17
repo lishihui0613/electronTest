@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <title>首页</title>
   <link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css">
-  <link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
+  <link rel="stylesheet" href="./tabs.css">
+ <link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
 
-  <script>
+  <!--<script>
+
   function ls(id){
     const TabGroup = require("electron-tabs");
     const dragula = require("dragula");
@@ -25,20 +27,26 @@
       visible: true
     });
   }
-
-  </script>
+  </script>-->
 </head>
 <body>
-  <div class="etabs-tabgroup">
-    <div class="etabs-tabs"></div>
+
+<div class="etabs-tabgroup">
+  <div class="etabs-tabs"></div>
+  <div class="etabs-buttons"></div>
 </div>
-<!--<div class="etabs-views" onclick="ls()">etabs-views</div>-->
-  <div class="etabs-views">
-    <div id="1" title="ls2-dev语言服务器" class="http://ls2-dev.51chaoqun.com" onclick="ls(1)">ls2-dev语言服务器</div>
-    <div id="2" title="cats使用" class="http://cats2.51chaoqun.com" onclick="ls(2)">cats使用</div>
-    <div id="3" title="关于我们" class="http://moodle3.com" onclick="ls(3)">关于我们</div>
-    <div id="4" title="问题反馈" class="" onclick="ls(4)">问题反馈</div>
-    <!--<webview src="http://ls2-dev.51chaoqun.com" allowpopups=on>pdf资料</webview>-->
-  </div>
+
+<div class="etabs-views">
+  <!--<div id="1" title="ls2-dev语言服务器" class="http://www.baidu.com">ls2-dev语言服务器</div>
+  <div id="2" title="cats使用" class="http://cats2.51chaoqun.com">cats使用</div>
+  <div id="3" title="关于我们" class="./page/about.html">关于我们</div>
+  <div id="4" title="问题反馈" class="./page/question.html">问题反馈</div>-->
+</div>
+<script src="./node_modules/jquery/dist/jquery.js"></script>
+<script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+<script>
+      // You can also require other files to run in this process
+      require('./js/renderer.js')
+</script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 // All of the Node.js APIs are available in this process.
 
 const TabGroup = require('electron-tabs');
+const path = require('path');
 const fs = require('fs');
 const dragula = require("dragula");
 let tabGroup = new TabGroup({
@@ -25,6 +26,14 @@ let tab = tabGroup.addTab({
 
 });
 
+//用node的fs模块读取数据
+fs.exists('./bb.txt',function (exists) {
+    console.log(exists)
+})
+fs.readFile("./bb.txt","utf-8",function (error,data) {
+    if (error) throw error;
+    console.log(data);
+})
 //实现添加tab，tab不重复
 for(var i=0;i<aDiv.length;i++){
     var cur=aDiv[i];

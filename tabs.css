@@ -1,4 +1,7 @@
-
+.over-flow{
+    overflow: auto;
+    zoom: 1;
+}
 .etabs-tabgroup {
     position: relative;
 
@@ -14,8 +17,36 @@
     margin-left: 63px;
 }
 .etabs-tab{
-    margin-top: 9px;
+    margin: 9px 3px 0 0;
     height: 30px;
     line-height: 30px;
     border-radius: 3px;
 }
+.content{
+    position: relative;
+}
+.nav{
+    position: absolute;
+    top:22px;
+    left: 20%;
+}
+.radius{
+
+    display: block;
+    float: left;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #e5e5e5;
+    margin: 0 0 14px 106px;
+}
+.cats img{
+    margin:5px 0 0 5px;
+}
+.icon img{
+    margin:5px 0 0 8px;
+    width: 37px;
+    height: 39px;
+}
+
+

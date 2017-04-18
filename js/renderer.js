@@ -3,6 +3,7 @@
 // All of the Node.js APIs are available in this process.
 
 const TabGroup = require('electron-tabs');
+const fs = require('fs');
 const dragula = require("dragula");
 let tabGroup = new TabGroup({
     ready: function (tabGroup) {
@@ -42,10 +43,11 @@ for(var i=0;i<aDiv.length;i++){
         }
         for(i=0;i<arr.length;i++){
             if(arr[i]==this.title){
-                return;
+                tab.active();
             }
         }
         e && e.stopPropagation();
+
         //点击页面时，实现添加tab并隐藏首页
         let tab = tabGroup.addTab({
             title: this.title,
@@ -53,10 +55,8 @@ for(var i=0;i<aDiv.length;i++){
             visible: true,
             active: true,
             ready:function () {
-                {
-                    for(i=0;i<aDiv.length;i++){
-                        aDiv[i].style.display='none';
-                    }
+                for(i=0;i<aDiv.length;i++){
+                    aDiv[i].style.display='none';
                 }
             }
         });
@@ -77,7 +77,7 @@ tabGroup.on("tab-active", function(tab, tabGroup){
 });
 
 tab.on("close", (tab) => {console.log(tab)});
-
+console.log(tab.activate())
 
 /*document.querySelector('.etabs-buttons').addEventListener('click',function(e){
     e && e.stopPropagation();

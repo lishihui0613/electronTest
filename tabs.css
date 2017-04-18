@@ -1,8 +1,21 @@
-/*.etabs-tabgroup{
-    position: fixed;
-    top:0;
-    left:0;
-}*/
+
+.etabs-tabgroup {
+    position: relative;
+
+    width: 100%;
+    height: 49px;
+}
+.etabs-tabgroup img {
+    position: absolute;
+    top:8px;
+    left: 12px;
+}
+.etabs-tabs{
+    margin-left: 63px;
+}
 .etabs-tab{
+    margin-top: 9px;
+    height: 30px;
+    line-height: 30px;
     border-radius: 3px;
 }

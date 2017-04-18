@@ -12,7 +12,7 @@ let tabGroup = new TabGroup({
     }
 });
 const contentView = document.querySelector('.etabs-views');
-
+var aDiv=contentView.getElementsByTagName('div');
 
 // 页面初始化
 let tab = tabGroup.addTab({
@@ -21,14 +21,10 @@ let tab = tabGroup.addTab({
     visible: true,
     active:true,
     closable:false,
-    ready:function () {
-
-    }
 
 });
 
-
-/*
+//实现添加tab，tab不重复
 for(var i=0;i<aDiv.length;i++){
     var cur=aDiv[i];
     cur.addEventListener('click',function (e) {
@@ -50,19 +46,37 @@ for(var i=0;i<aDiv.length;i++){
             }
         }
         e && e.stopPropagation();
+        //点击页面时，实现添加tab并隐藏首页
         let tab = tabGroup.addTab({
             title: this.title,
             src: this.className,
             visible: true,
-            active: true
+            active: true,
+            ready:function () {
+                {
+                    for(i=0;i<aDiv.length;i++){
+                        aDiv[i].style.display='none';
+                    }
+                }
+            }
         });
     })
 }
-*/
 
 
+tabGroup.on("tab-active", function(tab, tabGroup){
+    if(tab.title=='首页'){
+        for(i=0;i<aDiv.length;i++){
+            aDiv[i].style.display='block';
+        }
+    }else {
+        for(i=0;i<aDiv.length;i++){
+            aDiv[i].style.display='none';
+        }
+    }
+});
 
-
+tab.on("close", (tab) => {console.log(tab)});
 
 
 /*document.querySelector('.etabs-buttons').addEventListener('click',function(e){
@@ -89,5 +103,6 @@ for(var i=0;i<aDiv.length;i++){
 tabGroup.on("tab-active", (tab, tabGroup) => {
     // contentView.innerHTML = "这是第" + (1 + tab.id) + '个tab';
 });*/
+
 
 

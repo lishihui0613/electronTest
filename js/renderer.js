@@ -1,11 +1,11 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-const http=require('http');
-const TabGroup = require('electron-tabs');
-const path = require('path');
-const fs = require('fs');
-const dragula = require("dragula");
+var http=require('http');
+var TabGroup = require('electron-tabs');
+var path = require('path');
+var fs = require('fs');
+var dragula = require("dragula");
 let tabGroup = new TabGroup({
     ready: function (tabGroup) {
         dragula([tabGroup.tabContainer], {
@@ -13,8 +13,8 @@ let tabGroup = new TabGroup({
         });
     }
 });
-const contentView = document.querySelector('.etabs-views');
-const content = contentView.querySelector('.content');
+var contentView = document.querySelector('.etabs-views');
+var content = contentView.querySelector('.content');
 
 var aDiv=content.getElementsByTagName('div');
 
@@ -28,7 +28,7 @@ let tab = tabGroup.addTab({
 
 });
 
-//用node的fs模块读取数据
+//实现封装tabs功能
 var nav=document.getElementById('nav');
 var aLi=nav.getElementsByTagName('li');
 
@@ -71,7 +71,9 @@ var aLi=nav.getElementsByTagName('li');
         });
     })
 }*/
-//实现封装tabs功能
+var eTabs=document.getElementsByClassName('etabs-tabs');
+var eTab=document.getElementsByClassName('etabs-tab');
+console.log(eTab)
 function tabs(curEle) {
     for(var i = 0;i<curEle.length;i++){
         curEle[i].addEventListener('click',function (e) {
@@ -88,8 +90,16 @@ function tabs(curEle) {
                 })(i)
             }
             for(i=0;i<arr.length;i++){
+
                 if(arr[i]==this.title){
-                    return;
+                   /*var bbb = document.getElementsByClassName("etabs-tab");
+                   bbb[i].className = "active";
+                   var ccc = document.getElementsByTagName("webview");
+                    ccc[i].className="visible";*/
+                  /* this.className='active'*/
+                  /*eTab[i].className='active';
+                  console.log(eTab[i])*/
+               return;
                 }
             }
             e && e.stopPropagation();
@@ -99,18 +109,18 @@ function tabs(curEle) {
                 visible: true,
                 active: true,
                 ready:function () {
-                    /*for(i=0;i<aDiv.length;i++){
-                     aDiv[i].style.display='none';
-                     }*/
                     content.style.display='none';
-                }
+                },
+
             });
+            console.log(this.id)
+
         })
     }
 }
 
 //实现添加tab，tab不重复
-console.log(aDiv);
+
 tabs(aLi);
 tabs(aDiv);
 /*for(var i=0;i<aDiv.length;i++){
@@ -154,17 +164,16 @@ tabs(aDiv);
 
 tabGroup.on("tab-active", function(tab, tabGroup){
     if(tab.title=='首页'){
-        /*for(i=0;i<aDiv.length;i++){
-            aDiv[i].style.display='block';
-        }*/
         content.style.display='block';
     }else {
-        /*for(i=0;i<aDiv.length;i++){
-            aDiv[i].style.display='none';
-        }*/
         content.style.display='none';
     }
 });
+
+tabGroup.on("tab-removed",function (tab,tabGroup) {
+    console.log(tab,tabGroup)
+})
+
 
 
 
@@ -183,14 +192,16 @@ tabGroup.on("tab-active", function(tab, tabGroup){
 
 /*tabGroup.on("tab-removed", (tab, tabGroup) => {
     console.log(tab,tabGroup)
-});*/
+});
 
- /*tabGroup.on("tab-removed", (tab, tabGroup) => {
+tabGroup.on("tab-removed", (tab, tabGroup) => {
     // contentView.innerHTML = "这是第" + (1 + tab.id) + '个tab';
+    console.log(tab,tabGroup)
 });
 
 tabGroup.on("tab-active", (tab, tabGroup) => {
     // contentView.innerHTML = "这是第" + (1 + tab.id) + '个tab';
+    console.log(tab,tabGroup)
 });*/
 
 

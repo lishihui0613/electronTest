@@ -5,29 +5,7 @@
   <title>首页</title>
   <link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css">
   <link rel="stylesheet" href="./tabs.css">
- <link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
-
-  <!--<script>
-
-  function ls(id){
-    const TabGroup = require("electron-tabs");
-    const dragula = require("dragula");
-    var data=document.getElementById(id);
-    var tabGroup = new TabGroup({
-      ready: function (tabGroup) {
-        dragula([tabGroup.tabContainer], {
-            direction: "horizontal"
-        });
-      }
-    });
-    let tab = tabGroup.addTab({
-      title: data.title,
-      src: data.className,
-      // webviewAttributes:"http://ls2-dev.51chaoqun.com",
-      visible: true
-    });
-  }
-  </script>-->
+  <link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
 </head>
 <body>
 
@@ -41,12 +19,10 @@
   <div class="content">
       <ul id="nav" class="nav">
         <li class="radius cats" id="./page/setup.html" title="CATS设置"><img src="./image/cats.png" alt=""></li>
-
         <li class="radius icon" id="http://cats2.51chaoqun.com" title="吾译超群"><img src="./image/icon.png" alt=""></li>
-
       </ul>
 
-    <div id="http://www.baidu.com" title="ls2-dev语言服务器" class="">ls2-dev语言服务器</div>
+    <div id="./page/cooperation.html" title="校企合作" class="">校企合作</div>
     <div id="http://www.51chaoqun.com" title="cats使用" class="">cats使用</div>
     <div id="./page/about.html" title="关于我们" class="">关于我们</div>
     <div id="./page/question.html" title="问题反馈" class="">问题反馈</div>

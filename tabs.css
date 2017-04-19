@@ -31,14 +31,13 @@
     left: 20%;
 }
 .radius{
-
     display: block;
     float: left;
     width: 54px;
     height: 54px;
     border-radius: 50%;
     background: #e5e5e5;
-    margin: 0 0 14px 106px;
+    margin: 0 53px 14px 53px;
 }
 .cats img{
     margin:5px 0 0 5px;

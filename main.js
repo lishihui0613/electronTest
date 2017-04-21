@@ -21,10 +21,10 @@ function createWindow () {
   // Create the browserwindow.
 
   mainWindow = new BrowserWindow({
-      width: 800, height: 600,
+      width: 1366, height: 768,
       autoHideMenuBar: true,
       frame: true,
-      resizable: true,
+      resizable: true,//false不可改变窗口大小,
       icon: './image/icon.png',
       center: true,
       webPreferences: {
@@ -34,6 +34,7 @@ function createWindow () {
           //preload: path.join(__dirname, '../../inject/preload.js'),
       }
   });
+
 
   // and load theindex.html of the app.
 

@@ -2,13 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title></title>
+
 </head>
 <body>
+<form action="" method="post">
+    <input type="text" placeholder="请选择">
+    <button type="submit" class="button" onclick="get();">设置</button>
+</form>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;}</script>
+<!--<script src="../js/setup.js"></script>-->
+<script>
+    var setup=require('../js/setup.js');
+
+    function get() {
+        alert(1)
+        console.log(setup.ary)
 
 
-<input type="text" placeholder="请输入内容">
 
-
+    }
+</script>
 </body>
+
 </html>

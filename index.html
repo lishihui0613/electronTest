@@ -7,12 +7,13 @@
   <link rel="stylesheet" href="./tabs.css">
   <link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
 </head>
-<body>
+<body style="overflow:hidden ">
 
 <div class="etabs-tabgroup">
   <img src="./image/icon.png" alt="">
   <div class="etabs-tabs"></div>
   <div class="etabs-buttons"></div>
+  <em class="resite">返回</em>
 </div>
 
 <div class="etabs-views">
@@ -22,17 +23,23 @@
         <li class="radius icon" id="http://cats2.51chaoqun.com" title="吾译超群"><img src="./image/icon.png" alt=""></li>
       </ul>
 
-    <div id="./page/cooperation.html" title="校企合作" class="">校企合作</div>
+    <div id="http://www.51chaoqun.com/cooperation/" title="校企合作" class="">校企合作</div>
     <div id="http://www.51chaoqun.com" title="cats使用" class="">cats使用</div>
     <div id="./page/about.html" title="关于我们" class="">关于我们</div>
     <div id="./page/question.html" title="问题反馈" class="">问题反馈</div>
   </div>
 
 </div>
-
-<script>
+<script src="./node_modules/jquery/dist/jquery.js"></script>
+<script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;}</script>
+<!--<script>
       // You can also require other files to run in this process
       require('./js/renderer.js')
-</script>
+</script>-->
+<script src="./js/renderer.js"></script>
+
+
+
+
 </body>
 </html>

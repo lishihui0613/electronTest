@@ -1,8 +1,9 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-var http=require('http');
+
 var TabGroup = require('electron-tabs');
+var http=require('http');
 var path = require('path');
 var fs = require('fs');
 var dragula = require("dragula");
@@ -15,7 +16,8 @@ let tabGroup = new TabGroup({
 });
 var contentView = document.querySelector('.etabs-views');
 var content = contentView.querySelector('.content');
-
+var etabsTab = document.querySelector('.etabs-tabgroup');
+var resite = etabsTab.getElementsByClassName('resite')[0];
 var aDiv=content.getElementsByTagName('div');
 
 // 页面初始化
@@ -31,18 +33,29 @@ let tab = tabGroup.addTab({
 //实现封装tabs功能
 var nav=document.getElementById('nav');
 var aLi=nav.getElementsByTagName('li');
+var ary=[];
+fs.exists('../../moduleTest/config/config.ini',function (exists) {
+    console.log(exists)
+});
+fs.readFile('../../moduleTest/config/config.ini','utf-8',function (error,data) {
+    var data=data;
+    if (error) throw error;
+    console.log(data);
+    ary.push(data);
+    console.log(ary)
+    fs.writeFile('../moduleTest/config/config.txt',data,function (error) {
+        if(error){
+            console.error(error);
+        }else {
+            console.log('成功');
+        }
+    })
+})
 
 /*for(var i=0;i<aLi.length;i++){
-    aLi[i].addEventListener('click',function (e) {
-        /!*fs.exists('../../moduleTest/page/setup.html',function (exists) {
-         console.log(exists)
-         });
-         fs.readFile('../../moduleTest/page/setup.html','utf-8',function (error,data) {
-         if (error) throw error;
-         console.log(data);
+    aLi[i].addEventListener('click',function (e) {*/
 
-         })*!/
-        var arr=[];
+        /*var arr=[];
         var len=document.getElementsByClassName("etabs-tab").length;
         for(i=0;i<len;i++){
             (function(i){
@@ -90,16 +103,9 @@ function tabs(curEle) {
                 })(i)
             }
             for(i=0;i<arr.length;i++){
-
                 if(arr[i]==this.title){
-                   /*var bbb = document.getElementsByClassName("etabs-tab");
-                   bbb[i].className = "active";
-                   var ccc = document.getElementsByTagName("webview");
-                    ccc[i].className="visible";*/
-                  /* this.className='active'*/
-                  /*eTab[i].className='active';
-                  console.log(eTab[i])*/
-               return;
+                    // eTab[i].className='active';
+                    return;
                 }
             }
             e && e.stopPropagation();
@@ -111,7 +117,6 @@ function tabs(curEle) {
                 ready:function () {
                     content.style.display='none';
                 },
-
             });
             console.log(this.id)
 
@@ -162,6 +167,7 @@ tabs(aDiv);
 }*/
 
 
+
 tabGroup.on("tab-active", function(tab, tabGroup){
     if(tab.title=='首页'){
         content.style.display='block';
@@ -173,6 +179,9 @@ tabGroup.on("tab-active", function(tab, tabGroup){
 tabGroup.on("tab-removed",function (tab,tabGroup) {
     console.log(tab,tabGroup)
 })
+/*resite.onclick=function () {
+    alert(1)
+}*/
 
 
 

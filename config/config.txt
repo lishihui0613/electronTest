@@ -1,0 +1,8 @@
+[CATS]
+CATS=http://www.51chaoqun.com
+[ABOUT]
+ABOUT=/page/about.html
+[QUESTION]
+QUESTION=/page/question.html
+[SETUP]
+SETUP=/page/setup.html

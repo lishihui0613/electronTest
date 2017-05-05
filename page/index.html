@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" type="text/css" href="utils/css/jquery.mobile-1.1.0.css"> -->
+    <script type="text/javascript" src="utils/js/jquery-1.7.1.min.js"></script>
+    <!--&lt;!&ndash; <script type="text/javascript" src="utils/js/jquery.mobile-1.1.0.js"></script> &ndash;&gt;-->
+    <!--<script type="text/javascript" src="utils/js/RecordableDrawing.js"></script>-->
+    <!--<script type="text/javascript" src="utils/js/drawingSerializer.js"></script>-->
+    <style type="text/css">
+        #cans{ background:#ccc; border:1px solid red; }
+        .box{ height:150px; width:600px; }
+        .stroke_selected{background: red !important;}
+        .stroke{background:#ccc;  }
+        #colorsDiv{ width:100px; height:100px; }
+        .colorbox{ width:18px; height:18px; border:1px solid red; }
+        .selectedColor{ border-radius:3px; border:1px solid #000 !important; }
+    </style>
+
+
+
+    <title>ppwrite</title>
+    <!--<script src="https://cdn.bootcss.com/require.js/2.3.2/require.js"></script>-->
+    <!--<script src="test.js"></script>-->
+    
+</head>
+<body>
+    <h1>ppwrite!</h1>
+    We are using node <script>document.write(process.versions.node)</script>,<br>
+    Chromium <script>document.write(process.versions.chrome)</script>,<br>
+    and Electron <script>document.write(process.versions.electron)</script>.<br>
+
+
+    <canvas id="cans" width="600" height="971"></canvas>
+  <!--   <div class="box">
+        <div class="stroke" style="border-radius:3px;width:3px;height:3px"></div>
+        <div class="stroke" style="border-radius:6px;width:6px;height:6px"></div>
+        <div class="stroke" style="border-radius:8px;width:8px;height:8px"></div>
+        <div class="stroke" style="border-radius:12px;width:12px;height:12px"></div>
+        <div class="stroke" style="border-radius:150px;width:50px;height:50px"></div>
+        <div class="stroke stroke_selected" style="border-radius:18px;width:18px;height:18px"></div>
+    </div>
+
+    <div id="colorsDiv">
+        <div class="colorbox" id="blackbox" style="background-color:black"></div>
+        <div class="colorbox selectedColor" id="redbox" style="background-color:red;"></div>
+        <div class="colorbox" id="bluebox" style="background-color:blue;"></div>
+        <div class="colorbox" id="whitebox" style="background-color:white;"></div>
+        <div class="colorbox" id="greenbox" style="background-color:green;"></div>
+    </div>
+    <button id="record">记录</button>
+    <button id="stop">停止</button>
+    <button id="record1">重播</button>
+    <button id="serializeBtn">不知道是啥</button> -->
+
+
+    输出数据：<br>
+    <!--<input type="button" value="打开设备" id="btn"/>-->
+</body>
+
+<script>
+    // drawing = new RecordableDrawing("cans");
+    // var stop=document.getElementById('stop');
+    // stop.onclick=function(){
+    //     drawing.stopRecording();
+    // };
+    // var record=document.getElementById('record');
+    // record.onclick=function(){
+    //     drawing.startRecording();
+    // };
+    // var record1=document.getElementById('record1');
+    // record1.onclick=function(){
+    //     drawing.playRecording(function(){
+    //         console.log(1);
+    //     },function(){
+    //         console.log(2);
+    //     },function(){
+    //         console.log(3);
+    //     },function(){
+    //         console.log(4);
+    //     });
+    // };
+    // $(".stroke").click(function(){
+    //         $(".stroke_selected").removeClass("stroke_selected");
+    //         $(this).addClass("stroke_selected");
+    //         var size = $(this).css("border-radius");
+    //         drawing.setStokeSize(parseInt(size));
+    //     });
+    // $("#colorsDiv .colorbox").click(function(){
+    //         $("#colorsDiv .colorbox").removeClass("selectedColor");
+    //         $(this).addClass("selectedColor");
+    //         drawing.setColor($(this).css("background-color"));
+    //     });
+
+    // $("#serializeBtn").click(function() {
+    //         var serResult = serializeDrawing(drawing);
+    //         if (serResult != null)
+    //         {
+    //             console.log(eval('('+serResult+')'))
+    //         } else
+    //         {
+    //             alert("Error serializing data");
+    //         }
+    //     });
+    var pageX = 22015;
+    var pageY = 15359;
+    
+    var width = 640;
+    var height = 960;
+    var offsetX = 0.5;
+    var offsetY =0.5;//to smoothen the line
+    var ratioX = 1, ratioY = 1;
+    var counter = 1;
+    var watchdog = 1;
+    var started = 0;
+    var x1,y1,x2,y2,res=1;
+    var canvas = document.getElementById('cans');
+    var context = canvas.getContext('2d');
+
+
+    var isStart = null;
+
+    height = $(window).height() > height ? height : $(window).height() - 20;
+    width = height * pageX / pageY;
+
+    if(width > $(window).width() * 0.68){
+        width = $(window).width() * 0.68;
+        height = width * pageY / pageX;
+    }
+
+    ratioX = width/pageX;
+
+    ratioY = height/pageY;           
+    $(canvas).attr("width",width);
+    $(canvas).attr("height",height);
+
+    var s1=0;
+    var s2=0;
+    function lineTo(x, y,s){
+        console.log(s+'lineTo')
+        if(s!==17){
+            return;
+        }
+        if(isStart){
+            x2 = Math.floor(ratioX * x);
+            y2 = Math.floor(ratioY * y);
+            s1=x2,s2=y2;
+            var d = Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
+            if(d > res && s == 17){
+                isStart = false;
+                console.log(1)
+                x1=x2;y1=y2;
+                context.lineTo(x2,y2);
+                context.strokeStyle="#000000";
+                context.lineWidth = 1;
+                context.stroke();
+                context.closePath();
+                context.beginPath();
+                console.log(isStart)
+            }else {
+                context.save();
+            }
+        }else{
+//            isStart = 1;
+            isStart = true;
+            context.beginPath();
+            x1 = Math.floor(ratioX * x);
+            y1 = Math.floor(ratioY * y);
+            context.moveTo(x1,y1);
+            console.log(isStart)
+
+        }
+
+    }
+
+
+    var addon = require('./build/Release/addon');
+    // document.write('hello');
+    // function fDataCb(level, message)
+    // {
+    //     console.log('[' + level + '] : ' + message);
+    //     document.write('[' + level + '] : ' + message);
+    // }
+   var n=0;
+    /* var last2State=0;
+    var lastState=0;
+//    var leaveState=0;
+    var currentState=0;
+
+    var arrStat = [0,0,0];
+    var x_last=0;
+    var y_last=0;
+    var x_cur=0;
+    var y_cur=0;
+
+    var cntP=0;
+    var cntLoop=0*/
+    function fDataCb(x, y,s,npress) {
+        // console.log('[' + level + '] : ' + message);
+       /* cntP+=1;
+        cntLoop+=1;
+
+        x_last = x_cur;
+        y_last = y_cur;
+
+        x_cur = x;
+        y_cur = y;
+
+        x_interval = Math.abs(x_cur - x_last);
+        y_interval = Math.abs(y_cur - y_last);*/
+
+        /*if ( x_interval> (pageX / 1024) || y_interval > (pageY / 1024)) {
+
+            lastState = currentState;
+            currentState = s;
+            if(cntLoop==1){
+                arrStat[2]=s;
+            }else if(cntLoop==2){
+                arrStat[1]=currentState
+            }else{
+                last2State=arrStat[0]=arrStat[1];
+                cntLoop=0;
+            }*/
+//last2State==17 && lastState == 17 && currentState == 17
+        lineTo(x, y,s);
+            if (s==17) {
+
+
+
+                /*console.log(lastState + ' last')
+                console.log(currentState + ' current');
+                console.log('(x,y):'+x_interval+','+y_interval);*/
+            }else if(s==0 || s==16){
+//                context.closePath()
+            }
+//        }
+        n++;
+        if(n%50==0){
+            // drawing.doDrawing(x,y,npress);
+
+//            console.log('x= ' + x + 'y= ' + y + 's=' + s + 'npress' + npress);
+             console.log(n+'x= ' + x + 'y= ' + y + 's=' + s + 'npress=' + npress);
+           
+        }
+        
+    }
+
+    // 设置接收数据地址
+    var addres = addon.setCallBack(fDataCb);
+    // console.log(addres);
+    // 打开设备
+
+
+    /*var oB=document.getElementById('btn');
+    oB.onclick=function(){*/
+        var nOpenRes = addon.openDevice(1, 1);
+//    }
+
+
+</script>
+</html>   
